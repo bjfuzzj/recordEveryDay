@@ -2,12 +2,14 @@
 require 'connect.php';
 $cgi=getCGI();
 $action=isset($cgi['action'])?$cgi['action']:'index';
+$time=isset($cgi['time'])?$cgi['time']:'2015';
+$time.='-00-00';
 
 if(!$action) die('error');
 
 $json=array();
 if($action=='index'){
-	$sql = "select name,sum(num) as total from data group by name";
+	$sql = "select name,sum(num) as total from data  where time > '$time' group by name ";
 	$data = $mysql->getData( $sql );
 	if(count($data)>=1){
 		include("index_show.php");
@@ -50,7 +52,8 @@ EOF;
 elseif($action=='show'){
 	echo "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" /> ";
 	$name=$_GET['name'];
-	$sql="select * from data where name = '$name' ";
+	$time=$_GET['time'];
+	$sql="select * from data where time>'$time' and name = '$name' ";
 	$data = $mysql->getData( $sql );
 	if(count($data)>=1){
 		include("show_show.php");

@@ -92,8 +92,10 @@ echo "</div>";
 		}
 
 		function getshow(name){
+			var myDate = new Date();
+			var time=myDate.getFullYear();
 			if(name){
-				window.open("./datashow.php?action=show&name="+name);
+				window.open("./datashow.php?action=show&time="+time+"&name="+name);
 			}
 		}
 
