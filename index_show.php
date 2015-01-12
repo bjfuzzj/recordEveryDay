@@ -13,7 +13,7 @@
 <div class="jumbotron">
       <div class="container">
         <h1>欢迎来到"日省吾身"吧台</h1>
-        <p>这个只是记录我自己的一个状态</p>
+        <p>这个只是记录我自己的一个状态 <a href="./datashow.php?action=logout">退出</a></p> 
         <p><a class="btn btn-primary btn-lg" onclick="getout(' ')" role="button">开始记录 »</a></p>
       </div>
 </div>
@@ -50,6 +50,8 @@
 $all_css= array('default','primary','success','info','warning','danger');
 $echo_num=3;
 echo "<div class=\"row\"><div class=\"col-sm-4\">";
+
+if($data){
 foreach($data as $key => $value){
 	$css=$all_css[rand(0,5)];
 echo<<<EOF
@@ -66,6 +68,9 @@ EOF;
 	echo "</div><div class=\"col-sm-4\">";
 }
 echo "</div>";
+
+}
+
 ?>
 
 

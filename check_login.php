@@ -2,20 +2,20 @@
 require 'connect.php';
 $cgi=getCGI();
 
-$login=isset($cgi['login'])?:'';
-$register=isset($cgi['register'])?:'';
+$login=isset($cgi['login'])?$cgi['login']:'';
+$register=isset($cgi['register'])?$cgi['register']:'';
 
 //登陆
 if($login=='登陆'){
 	//获取输入的信息
-	$username = isset($cgi['username'])?:'';
-	$passcode = isset($cgi['passcode'])?:'';
+	$username = isset($cgi['username'])?$cgi['username']:'';
+	$passcode = isset($cgi['passcode'])?$cgi['passcode']:'';
 	if(empty($username) || empty($passcode))
 	{
 		echo "用户名或者密码错误";
 	}
 	//获取session的值
-	$sql="select * from user where username='$username' and password = '$passcode' limit 1";
+	$sql="select * from user where username='$username' and password ='".md5($passcode)."' limit 1";
 	$data = $mysql->getData( $sql );
 	if(count($data)>=1){
 		session_start();
@@ -26,14 +26,27 @@ if($login=='登陆'){
 			$_SESSION['username'] = $data[0]['username'];
 			$_SESSION['flag'] = $data[0]['flag'];
 			$_SESSION['userid']=$data[0]['userid'];
-			echo "<a href='datashow.php'>欢迎访问日省吾身吧台<;/a>";
+			echo<<<EOF
+		<script>
+		alert("欢迎来到日省吾身吧台");
+		window.location.href="./datashow.php";
+		</script>
+EOF;
 		}
+	}else{
+		echo<<<EOF
+		<script>
+		alert("用户不存在，请先注册");
+		window.location.href="./register.php";
+		</script>
+EOF;
+		exit;	
+	
 	}
-	or die("SQL语句执行失败");	
 }elseif($register=='注册'){
 	//获取输入的信息
-	$username = isset($cgi['username'])?:'';
-	$passcode = isset($cgi['passcode'])?:'';
+	$username = isset($cgi['username'])?$cgi['username']:'';
+	$passcode = isset($cgi['passcode'])?$cgi['passcode']:'';
 	if(empty($username) || empty($passcode))
 	{
 		echo<<<EOF
@@ -56,7 +69,7 @@ EOF;
 EOF;
 		exit;
 	}else{
-		$sql="insert into user  set username='$username',flag=0,password='".password_hash($passcode,PASSWORD_DEFAULT )."'";
+		$sql="insert into user  set username='$username',flag=0,password='".md5($passcode)."'";
 		$mysql->runSql( $sql );
 		if( $mysql->errno() != 0 )
 		{

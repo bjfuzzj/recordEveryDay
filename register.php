@@ -1,5 +1,7 @@
 <html>
-<head> 
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta charset="utf-8">
   <title>日省吾身注册/登陆</title> 
 </head> 
 <body> 

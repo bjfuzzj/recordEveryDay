@@ -17,14 +17,11 @@ echo<<<EOF
 EOF;
 }
 $userid=$_SESSION['userid'];
-
 $json=array();
 if($action=='index'){
 	$sql = "select name,sum(num) as total from data  where userid=$userid and time > '$time' group by name ";
 	$data = $mysql->getData( $sql );
-	if(count($data)>=1){
-		include("index_show.php");
-	}
+	include("index_show.php");
 	exit;
 }elseif($action=='update'){
 
@@ -41,7 +38,7 @@ echo<<<EOF
 			</script>
 EOF;
 	}
-			$sql = "insert into data set num=$cishu ,name='$huodong',des='$des',time='$shijian' where userid=$userid";
+			$sql = "insert into data set num=$cishu ,name='$huodong',des='$des',time='$shijian',userid=$userid";
 			$mysql->runSql( $sql );
 			if( $mysql->errno() != 0 ){
 			echo<<<EOF
@@ -72,6 +69,17 @@ elseif($action=='show'){
 	exit;
 }
 
+elseif($action=='logout'){
+	if(isset($_SESSION['username'])) unset($_SESSION['username']);
+	if(isset($_SESSION['flag'])) unset($_SESSION['flag']);
+	if(isset($_SESSION['userid'])) unset($_SESSION['userid']);
+			echo<<<EOF
+			<script>
+			alert("安全退出");
+			window.location.href="./register.php"; 
+			</script>
+EOF;
+}
 function getCGI()
 {
 	$cgi=array();
