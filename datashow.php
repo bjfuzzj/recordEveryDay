@@ -1,15 +1,26 @@
 <?php
+session_start();
 require 'connect.php';
 $cgi=getCGI();
 $action=isset($cgi['action'])?$cgi['action']:'index';
+$temp_time=date("Y",time());
 $time=isset($cgi['time'])?$cgi['time']:'2015';
 $time.='-00-00';
 
 if(!$action) die('error');
+if(!isset($_SESSION['userid']) || empty($_SESSION['userid'])){
+echo<<<EOF
+		<script>
+		alert("你还为登陆，请登陆后再访问");
+		window.location.href="./register.php";
+		</script>
+EOF;
+}
+$userid=$_SESSION['userid'];
 
 $json=array();
 if($action=='index'){
-	$sql = "select name,sum(num) as total from data  where time > '$time' group by name ";
+	$sql = "select name,sum(num) as total from data  where userid=$userid and time > '$time' group by name ";
 	$data = $mysql->getData( $sql );
 	if(count($data)>=1){
 		include("index_show.php");
@@ -30,7 +41,7 @@ echo<<<EOF
 			</script>
 EOF;
 	}
-			$sql = "insert into data set num=$cishu ,name='$huodong',des='$des',time='$shijian'";
+			$sql = "insert into data set num=$cishu ,name='$huodong',des='$des',time='$shijian' where userid=$userid";
 			$mysql->runSql( $sql );
 			if( $mysql->errno() != 0 ){
 			echo<<<EOF
@@ -53,7 +64,7 @@ elseif($action=='show'){
 	echo "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" /> ";
 	$name=$_GET['name'];
 	$time=$_GET['time'];
-	$sql="select * from data where time>'$time' and name = '$name' ";
+	$sql="select * from data where userid=$userid and time>'$time' and name = '$name' ";
 	$data = $mysql->getData( $sql );
 	if(count($data)>=1){
 		include("show_show.php");
