@@ -4,7 +4,7 @@ $cgi=getCGI();
 
 $login=isset($cgi['login'])?$cgi['login']:'';
 $register=isset($cgi['register'])?$cgi['register']:'';
-
+header("Content-type: text/html; charset=utf-8");
 //登陆
 if($login=='登陆'){
 	//获取输入的信息

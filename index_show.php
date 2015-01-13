@@ -22,7 +22,7 @@
 
 <form  action ='./datashow.php' method="post" class="form-inline" role="form" style="display:none">
   <div class="form-group">
-    <label class="sr-only" for="exampleInputEmail2">类型</label>
+    <label class="sr-only" for="exampleInputPassword2">类型</label>
     <input type="text" class="form-control" id="huodong" name = "huodong"  placeholder="请输入类型">
   </div>
   <div class="form-group">
@@ -90,6 +90,7 @@ echo "</div>";
 		})
 
 		function getout(name){
+			if(name==' ') name="请输入类型 ";
 			if(name){
 				$('.form-inline').show();			
 				$("#huodong").val(name);

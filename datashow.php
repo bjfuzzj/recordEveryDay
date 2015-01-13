@@ -6,12 +6,12 @@ $action=isset($cgi['action'])?$cgi['action']:'index';
 $temp_time=date("Y",time());
 $time=isset($cgi['time'])?$cgi['time']:'2015';
 $time.='-00-00';
-
+header("Content-type: text/html; charset=utf-8");
 if(!$action) die('error');
 if(!isset($_SESSION['userid']) || empty($_SESSION['userid'])){
 echo<<<EOF
 		<script>
-		alert("你还为登陆，请登陆后再访问");
+		alert("你还未登陆，请登陆后再访问");
 		window.location.href="./register.php";
 		</script>
 EOF;
