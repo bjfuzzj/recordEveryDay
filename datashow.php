@@ -27,7 +27,7 @@ if($action=='index'){
 
 echo "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" /> ";
 	$huodong=$cgi['huodong'];
-	$cishu=$cgi['cishu'];
+	$cishu=intval($cgi['cishu']);
 	$shijian=$cgi['shijian'];
 	$des=$cgi['des'];
 	if(empty($huodong)|| empty($cishu)||empty($shijian)){
