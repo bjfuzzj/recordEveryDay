@@ -21,21 +21,21 @@
 
 
 <form  action ='./datashow.php' method="post" class="form-inline" role="form" style="display:none">
-  <div class="form-group">
+  <div class="form-group has-success">
     <label class="sr-only" for="exampleInputPassword2">类型</label>
     <input type="text" class="form-control" id="huodong" name = "huodong"  placeholder="请输入类型">
   </div>
-  <div class="form-group">
+  <div class="form-group has-success">
     <label class="sr-only" for="exampleInputPassword2">次数</label>
     <input type="text" class="form-control" id="cishu"  name = "cishu" placeholder="请输入次数">
   </div>
 
-   <div class="form-group">
+   <div class="form-group has-success">
     <label class="sr-only" for="exampleInputPassword2">简介</label>
     <input type="text" class="form-control" id="des" value=''  name = "des" placeholder="请输入简介">
   </div>
 
-   <div class="form-group">
+   <div class="form-group has-success">
     <label class="sr-only" for="exampleInputPassword2">时间</label>
     <input type="text" class="span2" name="shijian" value="" id="dp1">
   </div>
