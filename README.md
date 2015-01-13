@@ -33,8 +33,8 @@ recordEveryDay
 
 [1]: ./pic/jietu1.jpg
 [2]: ./pic/jietu2.jpg
-[3]: ./pic/jietu3.jpg
-[4]: ./pic/jietu4.jpg
+[3]: ./pic/jietu3.png
+[4]: ./pic/jietu4.png
 
 
 #### **更新历史**
